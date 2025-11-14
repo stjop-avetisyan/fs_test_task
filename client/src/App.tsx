@@ -8,7 +8,7 @@ type Config = {
   operator: string;
 };
 
-const API = (import.meta as any).env?.VITE_API_BASE_URL;
+const API = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:3000';
 
 export default function App() {
   const [config, setConfig] = useState<Config | null>(null);

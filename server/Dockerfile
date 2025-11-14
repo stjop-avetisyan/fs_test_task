@@ -12,8 +12,14 @@ RUN npm run build || true
 FROM node:20-alpine
 WORKDIR /app
 ENV NODE_ENV=production
+
 COPY --from=build /app/dist ./dist
 COPY package.json ./package.json
+
+COPY jest.config.cjs ./jest.config.cjs
+COPY tsconfig.json ./tsconfig.json
+COPY src ./src
+
 COPY --from=build /app/node_modules ./node_modules
 EXPOSE 3000
 CMD ["node", "dist/index.js"]
