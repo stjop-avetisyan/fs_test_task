@@ -1,0 +1,33 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Builds
+/dist/
+**/dist/
+/build/
+**/build/
+
+# Coverage
+coverage/
+**/coverage/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Docker
+**/.docker-cache/

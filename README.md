@@ -140,13 +140,76 @@ ___
 - All source code **must be written in TypeScript**.
 - The **database must be PostgreSQL**, also running via **Docker container**.
 
-#### 🚫 Restrictions
-- **No AI code generation is allowed**.
-    - You **can use AI tools for help** (e.g., debugging, explanations), but **not to generate the code** itself.
 
 #### ✅ Optional Enhancements
 - **Unit tests** written with **Jest** are optional but would be considered a **plus**.
 
  
 
-# Good luck!
+---
+
+How to run (Docker)
+
+1) Copy environment file
+
+   cp env.example .env
+
+2) Build and start all services
+
+- Prerequisites: Docker and docker-compose
+  - Single command: 
+```bash
+  docker-compose up --build
+```
+
+Services:
+- Client (React): http://localhost:5173
+- Game Server (Node/Express): http://localhost:3000
+- PostgreSQL: localhost:5432 (user: casino, password: casino, db: casino)
+
+Local development (without Docker)
+
+1) Copy environment file
+
+   cp env.example .env
+
+2) Start PostgreSQL (you can also use docker-compose db only)
+
+3) Start the server
+
+   cd server
+   npm install
+   npm run dev
+
+4) Start the client in a different terminal
+
+   cd client
+   npm install
+   npm run dev
+
+Game flow in this repo
+- The client calls /config and /player on the game server.
+- On each spin, the server performs a withdrawal for the bet and a deposit for any win, records the round in PostgreSQL, and returns the result to the client.
+
+
+Run tests (Jest)
+
+To run the unit tests for the Node.js game server (Jest + TypeScript):
+
+1) Install dependencies
+
+   cd server
+   npm install
+
+2) Run tests
+
+   npm test
+
+Useful scripts:
+- npm run test:watch   # watch mode
+- npm run test:ci      # CI-friendly, runs in-band and silent
+
+Notes:
+- The server uses ESM TypeScript. Jest is configured via server/jest.config.cjs with ts-jest preset.
+- Tests live under server/src/__tests__. The game logic is in server/src/game.ts.
+- If you see "jest: not found", you likely skipped npm install in the server directory.
