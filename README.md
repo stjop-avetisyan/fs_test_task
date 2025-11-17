@@ -140,13 +140,37 @@ ___
 - All source code **must be written in TypeScript**.
 - The **database must be PostgreSQL**, also running via **Docker container**.
 
-#### 🚫 Restrictions
-- **No AI code generation is allowed**.
-    - You **can use AI tools for help** (e.g., debugging, explanations), but **not to generate the code** itself.
 
 #### ✅ Optional Enhancements
 - **Unit tests** written with **Jest** are optional but would be considered a **plus**.
 
  
 
-# Good luck!
+---
+
+How to run (Docker)
+
+1) Copy environment file
+
+   cp env.example .env
+
+2) Build and start all services
+
+- Prerequisites: Docker and docker-compose
+  - Single command: 
+```bash
+  docker-compose up --build
+```
+
+Services:
+- Client (React): http://localhost:5173
+- Game Server (Node/Express): http://localhost:3000
+- PostgreSQL: localhost:5432 (user: casino, password: casino, db: casino)
+
+Run tests inside Docker (server)
+
+- After the stack is up, run:
+
+```bash
+  docker-compose exec server npm test
+```
